@@ -1,0 +1,62 @@
+{% extends 'books/base.html' %}
+
+{% block title %}Главная{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h1 class="mb-4">Добро пожаловать в библиотеку!</h1>
+        
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="card text-white bg-primary">
+                    <div class="card-body">
+                        <h5 class="card-title">Всего книг</h5>
+                        <p class="card-text display-4">{{ total_books }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-white bg-success">
+                    <div class="card-body">
+                        <h5 class="card-title">Доступно</h5>
+                        <p class="card-text display-4">{{ available_books }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-white bg-info">
+                    <div class="card-body">
+                        <h5 class="card-title">Авторов</h5>
+                        <p class="card-text display-4">{{ total_authors }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2>Последние добавленные книги</h2>
+        <div class="row">
+            {% for book in recent_books %}
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ book.title }}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">{{ book.author.name }}</h6>
+                            <p class="card-text">
+                                Год: {{ book.publication_year }}<br>
+                                Страниц: {{ book.pages }}
+                            </p>
+                            <span class="badge {% if book.is_available %}bg-success{% else %}bg-danger{% endif %}">
+                                {% if book.is_available %}Доступна{% else %}Нет в наличии{% endif %}
+                            </span>
+                            <a href="{% url 'books:book_detail' book.pk %}" class="btn btn-sm btn-primary mt-2">Подробнее</a>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <p>Пока нет книг в библиотеке</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

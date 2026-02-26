@@ -1,0 +1,80 @@
+{% extends 'books/base.html' %}
+
+{% block title %}Список книг{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h1 class="mb-4">Каталог книг</h1>
+        
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5>Поиск и фильтрация</h5>
+            </div>
+            <div class="card-body">
+                <form method="get" class="row g-3">
+                    <div class="col-md-4">
+                        {{ form.query.label_tag }}
+                        {{ form.query }}
+                    </div>
+                    <div class="col-md-3">
+                        {{ form.author.label_tag }}
+                        {{ form.author }}
+                    </div>
+                    <div class="col-md-2">
+                        {{ form.year_from.label_tag }}
+                        {{ form.year_from }}
+                    </div>
+                    <div class="col-md-2">
+                        {{ form.year_to.label_tag }}
+                        {{ form.year_to }}
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-check mt-4">
+                            {{ form.available_only }}
+                            <label class="form-check-label" for="{{ form.available_only.id_for_label }}">
+                                Только доступные
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary">Применить фильтры</button>
+                        <a href="{% url 'books:book_list' %}" class="btn btn-secondary">Сбросить</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="row">
+            {% for book in books %}
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ book.title }}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">{{ book.author.name }}</h6>
+                            <p class="card-text">
+                                <strong>Год:</strong> {{ book.publication_year }}<br>
+                                <strong>ISBN:</strong> {{ book.isbn }}<br>
+                                <strong>Страниц:</strong> {{ book.pages }}<br>
+                                <strong>Статус:</strong> 
+                                <span class="badge {% if book.is_available %}bg-success{% else %}bg-danger{% endif %}">
+                                    {% if book.is_available %}Доступна{% else %}Нет в наличии{% endif %}
+                                </span>
+                            </p>
+                            <a href="{% url 'books:book_detail' book.pk %}" class="btn btn-info btn-sm">Подробнее</a>
+                            <a href="{% url 'books:book_update' book.pk %}" class="btn btn-warning btn-sm">Редактировать</a>
+                            <a href="{% url 'books:book_delete' book.pk %}" class="btn btn-danger btn-sm">Удалить</a>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="col-12">
+                    <p class="text-center">Книги не найдены</p>
+                </div>
+            {% endfor %}
+        </div>
+        
+        <p class="text-muted mt-3">Всего найдено: {{ books|length }} книг</p>
+    </div>
+</div>
+{% endblock %}

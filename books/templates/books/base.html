@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Библиотека {% block title %}{% endblock %}</title>
+     {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'books:home' %}">Библиотека</a>
+            <button type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li >
+                        <a class="nav-link" href="{% url 'books:home' %}">Главная</a>
+                    </li>
+                    <li >
+                        <a class="nav-link" href="{% url 'books:book_list' %}">Книги</a>
+                    </li>
+                    <li >
+                        <a class="nav-link" href="{% url 'books:author_list' %}">Авторы</a>
+                    </li>
+                    <li >
+                        <a class="nav-link" href="{% url 'books:book_create' %}">Добавить книгу</a>
+                    </li>
+                    <li >
+                        <a class="nav-link" href="{% url 'books:author_create' %}">Добавить автора</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <footer class="footer">
+        <div class="container text-center">
+            <p class="text-muted">Проект на Django с демонстрацией основных инструментов</p>
+        </div>
+    </footer>
+</body>
+</html>
