@@ -103,6 +103,10 @@
 7. Перейдите в папку для запуска проекта
     ```bash
     cd first_project
-8. Команда для запуска вашего проекта
+8. Создание приложениея внутри проекта
+    ```bash
+    python manage.py startapp module_project
+9. Команда для запуска вашего проекта
     ```bash
     python manage.py runserver
+
