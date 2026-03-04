@@ -65,7 +65,7 @@ def book_detail(request, pk):
 # Добавление новой книги
 def book_create(request):
     if request.method == 'POST':
-        form = BookForm(request.POST)
+        form = BookForm(request.POST,request.FILES)
         if form.is_valid():
             book = form.save()
             messages.success(request, f'Книга "{book.title}" успешно добавлена!')

@@ -21,6 +21,12 @@ class Book(models.Model):
     pages = models.IntegerField(verbose_name="Количество страниц")
     description = models.TextField(verbose_name="Описание", blank=True)
     is_available = models.BooleanField(default=True, verbose_name="Доступна")
+    cover_image = models.ImageField(
+        upload_to='book_covers/', 
+        verbose_name="Обложка книги", 
+        blank=True, 
+        null=True
+    )
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата добавления")
     
     def __str__(self):
