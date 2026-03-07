@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>Nike Air TN - 3D модель</title>
+    <style>
+        body { margin: 0; overflow: hidden; font-family: Arial, sans-serif; }
+        #info {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            background: rgba(0,0,0,0.7);
+            padding: 12px 24px;
+            border-radius: 30px;
+            pointer-events: none;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        #loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 18px;
+            background: rgba(0,0,0,0.8);
+            padding: 15px 30px;
+            border-radius: 40px;
+            z-index: 1000;
+            transition: opacity 0.5s;
+        }
+    </style>
+    <!-- Путь к модели -->
+    <script>
+        window.modelPath = "{% static 'sneaker_viewer/models/scene.gltf' %}";
+    </script>
+    
+    <!-- Подключаем Three.js -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.128.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.128.0/examples/jsm/"
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="info">Nike Air TN 👟</div>
+    <div id="canvas-container"></div>
+
+    <!-- Загружаем основной скрипт -->
+    <script type="module" src="{% static 'sneaker_viewer/js/main.js' %}"></script>
+</body>
+</html>
