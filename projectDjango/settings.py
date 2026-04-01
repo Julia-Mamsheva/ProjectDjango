@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'projectDjango.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'data' / 'db.sqlite3',  # внутри volume
+        'NAME': BASE_DIR / 'db.sqlite3',  # внутри volume
     }
 }
 CSRF_TRUSTED_ORIGINS = os.environ.get('CSRF_TRUSTED_ORIGINS', 'http://localhost').split(',')
