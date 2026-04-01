@@ -26,9 +26,10 @@ SECRET_KEY = 'django-insecure-mc@(2svrf90xn995^^(sz9#1)p2n6qs*ipmfjzc9eid&s*-a#f
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
 
-
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', SECRET_KEY)
+DEBUG = os.environ.get('DEBUG', '1') == '1'
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost').split(',')
 # Application definition
 
 INSTALLED_APPS = [
@@ -82,6 +83,7 @@ DATABASES = {
 }
 
 
+
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
 
@@ -119,6 +121,7 @@ USE_TZ = True
 # Статические файлы
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Медиа файлы
 MEDIA_URL = '/media/'
