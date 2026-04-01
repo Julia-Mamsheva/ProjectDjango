@@ -10,7 +10,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-# Собираем статику при сборке образа
-RUN python manage.py collectstatic --noinput
+# Создаём папку заранее и собираем статику
+RUN mkdir -p /app/staticfiles /app/static && \
+    DJANGO_SECRET_KEY=build-dummy-key python manage.py collectstatic --noinput
 
-CMD ["gunicorn", "projectDjango.wsgi:application", "--bind", "0.0.0.0:8080"]
+CMD ["sh", "-c", "python manage.py migrate && gunicorn projectDjango.wsgi:application --bind 0.0.0.0:8080"]
