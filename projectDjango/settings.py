@@ -121,8 +121,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 # Статические файлы
-
-STATICFILES_DIRS = [d for d in [os.path.join(BASE_DIR, 'static')] if os.path.isdir(d)]
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'temporary-build-key-not-for-production')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
