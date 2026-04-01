@@ -71,7 +71,8 @@ USE_I18N = True
 USE_TZ = True
 
 # Статические файлы
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+_static_dir = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [_static_dir] if os.path.isdir(_static_dir) else []
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
