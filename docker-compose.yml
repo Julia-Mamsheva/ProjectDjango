@@ -1,7 +1,8 @@
 services:
   web:
-    build: .
-    dockerfile: dockerfile
+    build:
+      context: .
+      dockerfile: dockerfile
     restart: always
     command: >
       sh -c "python manage.py migrate &&
