@@ -5,5 +5,5 @@ sqlparse==0.5.5
 gunicorn==21.2.0
 setuptools
 whitenoise==6.9.0
-cloudinary
-django-cloudinary-storage
+#cloudinary
+#django-cloudinary-storage
